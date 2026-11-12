@@ -9,3 +9,12 @@ scikit-learn      # TF-IDF, the reference Naive Bayes, SVM, KNN, metrics
 matplotlib
 pyyaml
 pytest
+
+# Phishing project additions
+pandas
+pyarrow
+datasketch
+beautifulsoup4
+lxml
+statsmodels
+torch             # CPU is enough for the CNN smoke test
