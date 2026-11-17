@@ -5,8 +5,10 @@ remaining deficit for that cluster's class (clusters are label-pure; verified in
 """
 import hashlib, json, random
 import pandas as pd
+import yaml
 
-SEED = 42
+with open("config.yaml") as f:
+    SEED = yaml.safe_load(f)["seed"]
 TARGET = {"train": 0.70, "val": 0.15, "test": 0.15}
 d = pd.read_parquet("data/clean.parquet", columns=["id", "label", "cluster_id", "sha256"])
 cl = d.groupby("cluster_id").agg(label=("label", "first"), nl=("label", "nunique"), n=("id", "size")).reset_index()

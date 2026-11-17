@@ -12,15 +12,18 @@ from pathlib import Path
 
 import numpy as np
 import pandas as pd
+import yaml
 from datasketch import MinHash, MinHashLSH
 
 from src.normalize import normalize_full
 
-SEED = 42
-CAP = 50_000
-JACCARD = 0.8
-NUM_PERM = 128
-SHINGLE = 3  # word 3-grams
+with open("config.yaml") as f:
+    _cfg = yaml.safe_load(f)
+SEED = _cfg["seed"]
+CAP = _cfg["clean"]["cap"]
+JACCARD = _cfg["clean"]["jaccard"]
+NUM_PERM = _cfg["clean"]["num_perm"]
+SHINGLE = _cfg["clean"]["shingle"]  # word n-grams
 
 
 def sha256(s: str) -> str:

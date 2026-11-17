@@ -1,7 +1,10 @@
 """Draw the blind label-audit sample defined in docs/label_audit_protocol.md."""
 import numpy as np, pandas as pd
+import yaml
 
-SEED, PER_CLASS = 42, 100
+with open("config.yaml") as f:
+    cfg = yaml.safe_load(f)
+SEED, PER_CLASS = cfg["seed"], cfg["audit"]["per_class"]
 d = pd.read_parquet("data/clean.parquet")
 rng = np.random.default_rng(SEED)
 picked = []

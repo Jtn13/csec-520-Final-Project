@@ -44,3 +44,15 @@ compare_to_reference: true   # when naive_bayes.implementation = scratch, also r
 
 output:
   dir: results
+
+clean:                       # dedup + near-duplicate clustering (src/build_clean.py)
+  cap: 50000                 # max rows kept after the stratified, cluster-preserving cap
+  jaccard: 0.8               # MinHash LSH similarity threshold for near-duplicate clusters
+  num_perm: 128              # MinHash permutations
+  shingle: 3                 # word n-gram size for shingling
+
+stress:                      # held-out stress corpus (src/build_stress.py)
+  prevalence: 0.01           # phishing share in Part B after subsampling phishing (all Part-B legit kept)
+
+audit:                       # blind label-audit sample (src/audit_sample.py, docs/label_audit_protocol.md)
+  per_class: 100             # messages drawn per class, at most one per near-duplicate cluster

@@ -8,11 +8,13 @@ Steps: same normalization -> drop empty/short -> drop any row exactly/near-dupli
 """
 import json, random
 import numpy as np, pandas as pd
+import yaml
 from datasketch import MinHashLSH
 from src.normalize import normalize_full
 from src.build_clean import minhash, sha256, cluster_minhash, NUM_PERM, JACCARD, SEED
 
-PREVALENCE = 0.01
+with open("config.yaml") as f:
+    PREVALENCE = yaml.safe_load(f)["stress"]["prevalence"]
 rep = {"seed": SEED, "prevalence_part_B": PREVALENCE}
 
 def load(fn, label, tag):
